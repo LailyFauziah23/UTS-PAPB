@@ -22,19 +22,21 @@ class MainActivity : AppCompatActivity() {
 //            Get Array
             val monthList = resources.getStringArray(R.array.month)
 
+            val kehadiranList = listOf("Hadir", "Tidak Hadir", "Izin", "Sakit")
+
 //            Initiate
             var selectedTime ="${timePicker.hour}:${timePicker.minute}"
             val _tempCalendar : Calendar = Calendar.getInstance()
             _tempCalendar.timeInMillis = System.currentTimeMillis()
             var selectedDate = "${_tempCalendar.get(Calendar.DAY_OF_MONTH)} ${monthList[_tempCalendar.get(Calendar.MONTH)]} ${_tempCalendar.get(Calendar.YEAR)}"
 
-
 //            Kehadiran Dropdown=======================================
-            val adapterKehadiran = ArrayAdapter<String>(
-                this,
+            val adapterKehadiran = ArrayAdapter(
+                this@MainActivity, // Use this@MainActivity to refer to the correct context
                 android.R.layout.simple_spinner_item,
                 kehadiranList
             )
+            adapterKehadiran.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Add this line to set dropdown view resource
             kehadiranSpinner.adapter = adapterKehadiran
 
 //            Selected Kehadiran
@@ -54,3 +56,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
